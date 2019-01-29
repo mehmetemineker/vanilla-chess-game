@@ -15,7 +15,10 @@ const initialBoardWithChessPieces = [
 window.onload = () => {
     boardCreate();
     chessPiecesInit();
-    document.getElementById("loading").classList.add("display-none");
+
+    setTimeout(() => {
+        document.getElementById("loading").classList.add("display-none");
+    }, 750);
 };
 
 function boardCreate() {
@@ -68,6 +71,6 @@ function chessPiecesInit() {
     }
 }
 
-function onPieceClick(e){
+function onPieceClick(e) {
     console.log(e)
 }

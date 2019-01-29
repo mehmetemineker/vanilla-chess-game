@@ -54,58 +54,58 @@ body {
     border-left: 2px solid #000;
 }
 
-.chess-app .chessman {
-    background: url(chessman.png);
+.chess-app .chess-piece {
+    background: url(chess-pieces.png);
     background-repeat: no-repeat;
     background-size: 400px;
     display: flex;
     flex: 1;
 }
 
-.chess-app .chessman.pawn.white {
+.chess-app .chess-piece.pawn.white {
     background-position: -329px 4px;
 }
 
-.chess-app .chessman.pawn.black {
+.chess-app .chess-piece.pawn.black {
     background-position: -329px -64px;
 }
 
-.chess-app .chessman.rooks.white {
+.chess-app .chess-piece.rook.white {
     background-position: -263px 4px;
 }
 
-.chess-app .chessman.rooks.black {
+.chess-app .chess-piece.rook.black {
     background-position: -263px -64px;
 }
 
-.chess-app .chessman.knights.white {
+.chess-app .chess-piece.knight.white {
     background-position: -196px 4px;
 }
 
-.chess-app .chessman.knights.black {
+.chess-app .chess-piece.knight.black {
     background-position: -196px -64px;
 }
 
-.chess-app .chessman.bishops.white {
+.chess-app .chess-piece.bishop.white {
     background-position: -129px 4px;
 }
 
-.chess-app .chessman.bishops.black {
+.chess-app .chess-piece.bishop.black {
     background-position: -129px -64px;
 }
 
-.chess-app .chessman.queen.white {
+.chess-app .chess-piece.queen.white {
     background-position: -62px 4px;
 }
 
-.chess-app .chessman.queen.black {
+.chess-app .chess-piece.queen.black {
     background-position: -62px -64px;
 }
 
-.chess-app .chessman.king.white {
+.chess-app .chess-piece.king.white {
     background-position: 5px 4px;
 }
 
-.chess-app .chessman.king.black {
+.chess-app .chess-piece.king.black {
     background-position: 5px -64px;
 }

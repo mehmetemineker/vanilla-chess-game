@@ -61,8 +61,13 @@ function chessPiecesInit() {
                 let piece = document.createElement("div");
                 piece.className = "chess-piece " + arrayItem;
 
+                tile.addEventListener("click", onPieceClick);
                 tile.appendChild(piece);
             }
         }
     }
+}
+
+function onPieceClick(e){
+    console.log(e)
 }

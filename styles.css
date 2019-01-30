@@ -23,6 +23,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 1000;
 }
 
 .loading::after {
@@ -59,16 +60,55 @@ body {
 }
 
 .chess-app .board .row .tile {
+    position: relative;
     display: flex;
     flex: 1;
 }
 
 .chess-app .board .row .tile.tile-even {
-    background: #fff7e9;
+    background: #ffebc7;
 }
 
 .chess-app .board .row .tile.tile-odd {
-    background: #14670f;
+    background: #809e44;
+}
+
+.chess-app .board .row .tile::after, .tile::before {
+    position: absolute;
+    color: #777;
+    text-align: center;
+    z-index: -1;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.chess-app .board .row .tile::after {
+    content: attr(data-name-letter);
+    bottom: -20px;
+    width: 100%;
+}
+
+.chess-app .board .row .tile::before {
+    content: attr(data-name-number);
+    left: -20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.chess-app .board .row .tile.moving-possible {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chess-app .board .row .tile.moving-possible .point {
+    background: rgba(0, 0, 0, 0.2);
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
 }
 
 .chess-app .moves-list {
@@ -84,6 +124,7 @@ body {
     background-size: 400px;
     display: flex;
     flex: 1;
+    cursor: pointer;
 }
 
 .chess-app .chess-piece.pawn.white {

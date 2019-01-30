@@ -1,2 +1,2 @@
 # Vanilla-Chess-Game
-Vanilla Javascript Chess Game Development
+VanillaJS Chess Game Development

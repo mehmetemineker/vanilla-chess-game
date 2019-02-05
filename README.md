@@ -1,4 +1,4 @@
 # Vanilla Chess Game
-VanillaJS Chess Game Development
+VanillaJS - ES6 Chess Game Development
 
 ![chess-ss](chess-ss.jpg)

@@ -24,6 +24,7 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 1000;
+    display: none !important;
 }
 
 .loading::after {
@@ -38,7 +39,7 @@ body {
     display: none !important;
 }
 
-.chess-app {
+chess-app {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,7 +47,7 @@ body {
     border: 2px solid #000;
 }
 
-.chess-app .board {
+chess-board {
     display: flex;
     flex-direction: column;
     background: #949494;
@@ -54,26 +55,23 @@ body {
     width: 600px;
 }
 
-.chess-app .board .row {
+chess-board-row {
     display: flex;
     flex: 1;
 }
 
-.chess-app .board .row .tile {
+chess-board-tile {
     position: relative;
     display: flex;
     flex: 1;
-}
-
-.chess-app .board .row .tile.tile-even {
-    background: #ffebc7;
-}
-
-.chess-app .board .row .tile.tile-odd {
     background: #809e44;
 }
 
-.chess-app .board .row .tile::after, .tile::before {
+chess-board-tile[odd] {
+    background: #ffebc7;
+}
+
+/* chess-board-tile::after, chess-board-tile::before {
     position: absolute;
     color: #777;
     text-align: center;
@@ -82,31 +80,31 @@ body {
     font-weight: 700;
 }
 
-.chess-app .board .row .tile::after {
+chess-board-tile::after {
     content: attr(data-name-letter);
     bottom: -20px;
     width: 100%;
 }
 
-.chess-app .board .row .tile::before {
+chess-board-tile::before {
     content: attr(data-name-number);
     left: -20px;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
-}
+} */
 
-.chess-app .board .row .tile .point {
+chess-board-tile .point {
     display: none;
 }
 
-.chess-app .board .row .tile.moving-possible {
+chess-board-tile.moving-possible {
     cursor: pointer;
     box-shadow: inset 0 0 0 100px rgba(0, 0, 0, 0.1);
 }
 
-.chess-app .board .row .tile.moving-possible .point {
+chess-board-tile.moving-possible .point {
     background: rgba(0, 0, 0, 0.2);
     height: 30px;
     width: 30px;
@@ -119,14 +117,7 @@ body {
     display: block;
 }
 
-.chess-app .moves-list {
-    background: #f1e5cf;
-    height: 600px;
-    width: 250px;
-    border-left: 2px solid #000;
-}
-
-.chess-app .chess-piece {
+chess-piece {
     background: url(chess-pieces.png);
     background-repeat: no-repeat;
     background-size: 400px;
@@ -135,50 +126,54 @@ body {
     cursor: pointer;
 }
 
-.chess-app .chess-piece.pawn.white {
+chess-piece[type="pawn"][color="white"] {
     background-position: -329px 4px;
 }
 
-.chess-app .chess-piece.pawn.black {
+chess-piece[type="pawn"][color="black"] {
     background-position: -329px -64px;
 }
 
-.chess-app .chess-piece.rook.white {
+chess-piece[type="rook"][color="white"] {
     background-position: -263px 4px;
 }
 
-.chess-app .chess-piece.rook.black {
+chess-piece[type="rook"][color="black"] {
     background-position: -263px -64px;
 }
 
-.chess-app .chess-piece.knight.white {
+chess-piece[type="knight"][color="white"] {
     background-position: -196px 4px;
 }
 
-.chess-app .chess-piece.knight.black {
+chess-piece[type="knight"][color="black"] {
     background-position: -196px -64px;
 }
 
-.chess-app .chess-piece.bishop.white {
+chess-piece[type="bishop"][color="white"] {
     background-position: -129px 4px;
 }
 
-.chess-app .chess-piece.bishop.black {
+chess-piece[type="bishop"][color="black"] {
     background-position: -129px -64px;
 }
 
-.chess-app .chess-piece.queen.white {
+chess-piece[type="queen"][color="white"] {
     background-position: -62px 4px;
 }
 
-.chess-app .chess-piece.queen.black {
+chess-piece[type="queen"][color="black"] {
     background-position: -62px -64px;
 }
 
-.chess-app .chess-piece.king.white {
+chess-piece[type="king"][color="white"] {
     background-position: 5px 4px;
 }
 
-.chess-app .chess-piece.king.black {
+chess-piece[type="king"][color="black"] {
     background-position: 5px -64px;
+}
+
+chess-board-tile.deneme {
+    background: rebeccapurple;
 }

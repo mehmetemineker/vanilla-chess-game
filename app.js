@@ -207,7 +207,10 @@ class ChessPiece extends HTMLElement {
                 let tile = document.querySelector("chess-board-tile[rowindex='" + startRowIndex + "'][columnindex='" + startColumnIndex + "']");
 
                 if (tile) {
-                    tile.classList.toggle("deneme");
+                    let child = tile.childNodes[0];
+                    if (!(child && child.color == this.color)) {
+                        tile.classList.toggle("deneme");
+                    }
                 }
             }
         }

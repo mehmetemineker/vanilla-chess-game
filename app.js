@@ -6,81 +6,27 @@ const constants = {
         ["rook black", "knight black", "bishop black", "queen black", "king black", "bishop black", "knight black", "rook black"],
         ["pawn black", "pawn black", "pawn black", "pawn black", "pawn black", "pawn black", "pawn black", "pawn black"],
         ["", "", "", "", "knight white", "", "", ""],
-        ["", "", "bishop white", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", ""],
-        ["pawn white", "pawn white", "pawn white", "pawn white", "pawn white", "pawn white", "pawn white", "pawn white"],
+        ["", "rook white", "", "", "", "", "", ""],
+        ["", "", "king black", "", "bishop black", "", "", ""],
+        ["", "", "", "pawn white", "", "", "", ""],
+        ["pawn white", "pawn white", "", "pawn white", "pawn white", "pawn white", "pawn white", "pawn white"],
         ["rook white", "knight white", "bishop white", "queen white", "king white", "bishop white", "knight white", "rook white"]
     ],
-    kingAbilityToMoveArray: [
-        [1, 1, 1],
-        [1, 0, 1],
-        [1, 1, 1]
-    ],
-    pawnAbilityToMoveArray: [
-        [0, 0, 1, 0, 0],
-        [0, 1, 1, 1, 0],
-        [0, 0, 0, 0, 0],
-        [0, 1, 1, 1, 0],
-        [0, 0, 1, 0, 0]
-    ],
+    pieces: {
+        pawn: "pawn",
+        rook: "rook",
+        knight: "knight",
+        bishop: "bishop",
+        queen: "queen",
+        king: "king"
+    },
+    abilityToMoveClassName: "ability-to-move",
     knightAbilityToMoveArray: [
         [0, 1, 0, 1, 0],
         [1, 0, 0, 0, 1],
         [0, 0, 0, 0, 0],
         [1, 0, 0, 0, 1],
         [0, 1, 0, 1, 0]
-    ],
-    bishopAbilityToMoveArray: [
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
-        [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
-        [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-        [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
-        [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-        [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
-        [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
-    ],
-    rookAbilityToMoveArray: [
-        [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-        [1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]
-    ],
-    queenAbilityToMoveArray: [
-        [1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
-        [0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0],
-        [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0],
-        [0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0],
-        [0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-        [1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0],
-        [0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0],
-        [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0],
-        [0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0],
-        [1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1]
     ]
 };
 
@@ -185,35 +131,226 @@ class ChessPiece extends HTMLElement {
         this.color = color;
         this.rowIndex = rowIndex;
         this.columnIndex = columnIndex;
+        this.clickToggle = true;
 
-        this.addEventListener("click", e => {
+        this.addEventListener("click", () => {
             this.showAbilityToMove();
         });
     }
 
     showAbilityToMove() {
-        let abilityToMoveArray = constants[this.type + "AbilityToMoveArray"];
+        var pieces = document.getElementsByTagName("chess-piece");
 
-        for (let rowIndex = 0; rowIndex < abilityToMoveArray.length; rowIndex++) {
-            for (let columnIndex = 0; columnIndex < abilityToMoveArray.length; columnIndex++) {
-                const item = abilityToMoveArray[rowIndex][columnIndex];
+        for (let pieceIndex = 0; pieceIndex < pieces.length; pieceIndex++) {
+            const piece = pieces[pieceIndex];
+
+            if (piece != this) {
+                piece.clickToggle = true;
+            }
+        }
+
+        let tiles = document.getElementsByTagName("chess-board-tile");
+
+        for (let i = 0; i < tiles.length; i++) {
+            const tile = tiles[i];
+            tile.classList.remove(constants.abilityToMoveClassName);
+        }
+
+        if (this.clickToggle) {
+            switch (this.type) {
+                case constants.pieces.bishop:
+                    this.moveAbilityRightDownCross();
+                    this.moveAbilityRightUpCross();
+                    this.moveAbilityLeftDownCross();
+                    this.moveAbilityLeftUpCross();
+                    break;
+                case constants.pieces.rook:
+                    this.moveAbilityUpwards();
+                    this.moveAbilityDownwards();
+                    this.moveAbilityToTheLeft();
+                    this.moveAbilityToTheRight();
+                    break;
+                case constants.pieces.queen:
+                    this.moveAbilityRightDownCross();
+                    this.moveAbilityRightUpCross();
+                    this.moveAbilityLeftDownCross();
+                    this.moveAbilityLeftUpCross();
+                    this.moveAbilityUpwards();
+                    this.moveAbilityDownwards();
+                    this.moveAbilityToTheLeft();
+                    this.moveAbilityToTheRight();
+                    break;
+                case constants.pieces.king:
+                    this.moveAbilityRightDownCross(2);
+                    this.moveAbilityRightUpCross(2);
+                    this.moveAbilityLeftDownCross(2);
+                    this.moveAbilityLeftUpCross(2);
+                    this.moveAbilityUpwards(2);
+                    this.moveAbilityDownwards(2);
+                    this.moveAbilityToTheLeft(2);
+                    this.moveAbilityToTheRight(2);
+                    break;
+                case constants.pieces.knight:
+                    this.moveAbilityKnight();
+                    break;
+                case constants.pieces.pawn:
+                    this.moveAbilityPawn();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        this.clickToggle = !this.clickToggle;
+
+        if (document.getElementsByClassName("ability-to-move").length == 0 && this.clickToggle == false) {
+            this.clickToggle = true;
+        }
+    }
+
+    moveAbilityRightDownCross(length = 8) {
+        for (let i = 1; i < length; i++) {
+            if (this.moveAbility(+this.rowIndex + i, +this.columnIndex + i) == false) break;
+        }
+    }
+
+    moveAbilityRightUpCross(length = 8) {
+        for (let i = 1; i < length; i++) {
+            if (this.moveAbility(+this.rowIndex - i, +this.columnIndex + i) == false) break;
+        }
+    }
+
+    moveAbilityLeftDownCross(length = 8) {
+        for (let i = 1; i < length; i++) {
+            if (this.moveAbility(+this.rowIndex + i, +this.columnIndex - i) == false) break;
+        }
+    }
+
+    moveAbilityLeftUpCross(length = 8) {
+        for (let i = 1; i < length; i++) {
+            if (this.moveAbility(+this.rowIndex - i, +this.columnIndex - i) == false) break;
+        }
+    }
+
+    moveAbilityUpwards(length = 8) {
+        for (let i = 1; i < length; i++) {
+            if (this.moveAbility(+this.rowIndex - i, this.columnIndex) == false) break;
+        }
+    }
+
+    moveAbilityDownwards(length = 8) {
+        for (let i = 1; i < length; i++) {
+            if (this.moveAbility(+this.rowIndex + i, this.columnIndex) == false) break;
+        }
+    }
+
+    moveAbilityToTheRight(length = 8) {
+        for (let i = 1; i < length; i++) {
+            if (this.moveAbility(this.rowIndex, +this.columnIndex + i) == false) break;
+        }
+    }
+
+    moveAbilityToTheLeft(length = 8) {
+        for (let i = 1; i < length; i++) {
+            if (this.moveAbility(this.rowIndex, +this.columnIndex - i) == false) break;
+        }
+    }
+
+    moveAbilityKnight() {
+        for (let rowIndex = 0; rowIndex < constants.knightAbilityToMoveArray.length; rowIndex++) {
+            for (let columnIndex = 0; columnIndex < constants.knightAbilityToMoveArray.length; columnIndex++) {
+                const item = constants.knightAbilityToMoveArray[rowIndex][columnIndex];
 
                 if (item === 0) {
                     continue;
                 }
 
-                let startRowIndex = rowIndex + (this.rowIndex - Math.floor(abilityToMoveArray.length / 2));
-                let startColumnIndex = columnIndex + (this.columnIndex - Math.floor(abilityToMoveArray.length / 2));
+                let startRowIndex = rowIndex + (this.rowIndex - Math.floor(constants.knightAbilityToMoveArray.length / 2));
+                let startColumnIndex = columnIndex + (this.columnIndex - Math.floor(constants.knightAbilityToMoveArray.length / 2));
                 let tile = document.querySelector("chess-board-tile[rowindex='" + startRowIndex + "'][columnindex='" + startColumnIndex + "']");
 
                 if (tile) {
                     let child = tile.childNodes[0];
                     if (!(child && child.color == this.color)) {
-                        tile.classList.toggle("deneme");
+                        tile.classList.toggle(constants.abilityToMoveClassName);
                     }
                 }
             }
         }
+    }
+
+    moveAbilityPawn() {
+        let tile1 = document.querySelector("chess-board-tile[rowindex='" + (+this.rowIndex - 1) + "'][columnindex='" + this.columnIndex + "']");
+        let tile2 = document.querySelector("chess-board-tile[rowindex='" + (+this.rowIndex - 2) + "'][columnindex='" + this.columnIndex + "']");
+        let tile3 = document.querySelector("chess-board-tile[rowindex='" + (+this.rowIndex - 1) + "'][columnindex='" + (+this.columnIndex - 1) + "']");
+        let tile4 = document.querySelector("chess-board-tile[rowindex='" + (+this.rowIndex - 1) + "'][columnindex='" + (+this.columnIndex + 1) + "']");
+
+        if (this.color == "black") {
+            tile1 = document.querySelector("chess-board-tile[rowindex='" + (+this.rowIndex + 1) + "'][columnindex='" + this.columnIndex + "']");
+            tile2 = document.querySelector("chess-board-tile[rowindex='" + (+this.rowIndex + 2) + "'][columnindex='" + this.columnIndex + "']");
+            tile3 = document.querySelector("chess-board-tile[rowindex='" + (+this.rowIndex + 1) + "'][columnindex='" + (+this.columnIndex + 1) + "']");
+            tile4 = document.querySelector("chess-board-tile[rowindex='" + (+this.rowIndex + 1) + "'][columnindex='" + (+this.columnIndex - 1) + "']");
+        }
+
+        if (tile1) {
+            let child = tile1.childNodes[0];
+            if (!(child && child.color == this.color)) {
+                tile1.classList.toggle(constants.abilityToMoveClassName);
+            }
+        }
+
+        if (!(tile1 && tile1.childNodes[0])) {
+            if (tile2 && this.rowIndex == (this.color == "white" ? 6 : 1)) {
+                let child = tile2.childNodes[0];
+                if (!(child && child.color == this.color)) {
+                    tile2.classList.toggle(constants.abilityToMoveClassName);
+                }
+            }
+        }
+
+        if (tile3) {
+            let child = tile3.childNodes[0];
+            if (!(child && child.color == this.color)) {
+                tile3.classList.toggle(constants.abilityToMoveClassName);
+            }
+
+            if (!child) {
+                tile3.classList.toggle(constants.abilityToMoveClassName);
+            }
+        }
+
+        if (tile4) {
+            let child = tile4.childNodes[0];
+            if (!(child && child.color == this.color)) {
+                tile4.classList.toggle(constants.abilityToMoveClassName);
+            }
+
+            if (!child) {
+                tile4.classList.toggle(constants.abilityToMoveClassName);
+            }
+        }
+    }
+
+    moveAbility(rowIndex, columnIndex) {
+        let tile = document.querySelector("chess-board-tile[rowindex='" + rowIndex + "'][columnindex='" + columnIndex + "']");
+
+        if (tile) {
+            let child = tile.childNodes[0];
+
+            if ((child && child.color == this.color)) {
+                return false;
+            }
+
+            tile.classList.add(constants.abilityToMoveClassName);
+
+            if ((child && child.color != this.color)) {
+                return false;
+            }
+        } else {
+            return false;
+        }
+
+        return true;
     }
 
     get type() {

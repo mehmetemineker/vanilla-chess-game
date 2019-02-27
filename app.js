@@ -5,11 +5,11 @@ const constants = {
     initialBoardWithChessPieces: [
         ["rook black", "knight black", "bishop black", "queen black", "king black", "bishop black", "knight black", "rook black"],
         ["pawn black", "pawn black", "pawn black", "pawn black", "pawn black", "pawn black", "pawn black", "pawn black"],
-        ["", "", "", "", "knight white", "", "", ""],
-        ["", "rook white", "", "", "", "", "", ""],
-        ["", "", "king black", "", "bishop black", "", "", ""],
-        ["", "", "", "pawn white", "", "", "", ""],
-        ["pawn white", "pawn white", "", "pawn white", "pawn white", "pawn white", "pawn white", "pawn white"],
+        ["", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", ""],
+        ["pawn white", "pawn white", "pawn white", "pawn white", "pawn white", "pawn white", "pawn white", "pawn white"],
         ["rook white", "knight white", "bishop white", "queen white", "king white", "bishop white", "knight white", "rook white"]
     ],
     pieces: {
@@ -37,6 +37,9 @@ class ChessApp extends HTMLElement {
         this.append(this.chessBoard);
 
         this.initPieces();
+
+        this.whoIsNext = "white";
+        this.activePiece = null;
     }
 
     initPieces() {
@@ -100,6 +103,31 @@ class ChessBoardTile extends HTMLElement {
         if ((rowIndex + columnIndex) % 2 == 0) {
             this.setAttribute("odd", "");
         }
+
+        this.addEventListener("click", (e) => {
+            let target = e.target;
+
+            if (target.nodeName != this.nodeName) {
+                target = e.target.parentElement;
+            }
+
+            if (target.classList.contains(constants.abilityToMoveClassName)) {
+                var chessApp = document.getElementsByTagName("chess-app")[0];
+
+                chessApp.whoIsNext = chessApp.whoIsNext == "white" ? "black" : "white";
+                chessApp.activePiece.rowIndex = this.rowIndex;
+                chessApp.activePiece.columnIndex = this.columnIndex;
+                chessApp.activePiece.clickToggle = !chessApp.activePiece.clickToggle;
+                chessApp.activePiece.removeAllAbilityToMoveClassName();
+
+
+                if (this.childElementCount == 1) {
+                    this.removeChild(this.childNodes[0]);
+                }
+
+                this.appendChild(chessApp.activePiece)
+            }
+        });
     }
 
     get name() {
@@ -134,7 +162,18 @@ class ChessPiece extends HTMLElement {
         this.clickToggle = true;
 
         this.addEventListener("click", () => {
-            this.showAbilityToMove();
+
+            var chessApp = document.getElementsByTagName("chess-app")[0];
+
+
+            if (chessApp.whoIsNext == this.color) {
+                chessApp.activePiece = null;
+                if (this.clickToggle) {
+                    chessApp.activePiece = this;
+                }
+
+                this.showAbilityToMove();
+            }
         });
     }
 
@@ -149,12 +188,7 @@ class ChessPiece extends HTMLElement {
             }
         }
 
-        let tiles = document.getElementsByTagName("chess-board-tile");
-
-        for (let i = 0; i < tiles.length; i++) {
-            const tile = tiles[i];
-            tile.classList.remove(constants.abilityToMoveClassName);
-        }
+        this.removeAllAbilityToMoveClassName();
 
         if (this.clickToggle) {
             switch (this.type) {
@@ -203,7 +237,7 @@ class ChessPiece extends HTMLElement {
 
         this.clickToggle = !this.clickToggle;
 
-        if (document.getElementsByClassName("ability-to-move").length == 0 && this.clickToggle == false) {
+        if (document.getElementsByClassName(constants.abilityToMoveClassName).length == 0 && this.clickToggle == false) {
             this.clickToggle = true;
         }
     }
@@ -294,7 +328,7 @@ class ChessPiece extends HTMLElement {
 
         if (tile1) {
             let child = tile1.childNodes[0];
-            if (!(child && child.color == this.color)) {
+            if (!child) {
                 tile1.classList.toggle(constants.abilityToMoveClassName);
             }
         }
@@ -351,6 +385,15 @@ class ChessPiece extends HTMLElement {
         }
 
         return true;
+    }
+
+    removeAllAbilityToMoveClassName() {
+        let tiles = document.getElementsByTagName("chess-board-tile");
+
+        for (let i = 0; i < tiles.length; i++) {
+            const tile = tiles[i];
+            tile.classList.remove(constants.abilityToMoveClassName);
+        }
     }
 
     get type() {

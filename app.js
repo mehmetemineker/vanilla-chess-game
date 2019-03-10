@@ -3,14 +3,14 @@
 const constants = {
     boardLetters: ["A", "B", "C", "D", "E", "F", "G", "H"],
     initialBoardWithChessPieces: [
-        ["rook black", "knight black", "bishop black", "queen black", "king black", "bishop black", "knight black", "rook black"],
-        ["pawn black", "pawn black", "pawn black", "pawn black", "pawn black", "pawn black", "pawn black", "pawn black"],
+        ["rook black", "knight black", "bishop black", "queen black", "", "bishop black", "knight black", "rook black"],
+        ["pawn black", "pawn black", "pawn black", "pawn black", "king black", "pawn black", "pawn black", "pawn black"],
         ["", "", "", "", "", "", "", ""],
+        ["", "", "", "", "pawn black", "", "", ""],
         ["", "", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", ""],
-        ["pawn white", "pawn white", "pawn white", "pawn white", "pawn white", "pawn white", "pawn white", "pawn white"],
-        ["rook white", "knight white", "bishop white", "queen white", "king white", "bishop white", "knight white", "rook white"]
+        ["", "", "", "", "", "", "bishop white", ""],
+        ["pawn white", "bishop white", "pawn white", "pawn white", "pawn white", "pawn white", "pawn white", "pawn white"],
+        ["rook white", "knight white", "", "queen white", "king white", "", "knight white", "rook white"]
     ],
     pieces: {
         pawn: "pawn",
@@ -40,6 +40,7 @@ class ChessApp extends HTMLElement {
 
         this.whoIsNext = "white";
         this.activePiece = null;
+        this.isCheckMate = false;
     }
 
     initPieces() {
@@ -58,6 +59,45 @@ class ChessApp extends HTMLElement {
                     const color = initItem[1];
 
                     tile.append(new ChessPiece(type, color, rowIndex, columnIndex));
+                }
+            }
+        }
+
+        this.checkMateControl();
+    }
+
+    checkMateControl() {
+        this.isCheckMate = false;
+        let tiles = document.getElementsByTagName("chess-board-tile");
+        for (let index = 0; index < tiles.length; index++) {
+            const tile = tiles[index];
+            tile.classList.remove("check");
+            tile.classList.remove("check-white");
+            tile.classList.remove("check-black");
+            tile.classList.remove("check-mate");
+        }
+
+        let pieces = document.getElementsByTagName("chess-piece");
+        for (let i = 0; i < pieces.length; i++) {
+            pieces[i].showAbilityToMove();
+
+            let abilityTiles = document.getElementsByClassName("ability-to-move");
+            for (let j = 0; j < abilityTiles.length; j++) {
+                const tilabilityTile = abilityTiles[j];
+
+                tilabilityTile.classList.add("check");
+
+                let child = tilabilityTile.childNodes[0];
+                if (child && child.type == "king") {
+                    console.log(child, pieces[i]);
+                    tilabilityTile.classList.add("check-mate");
+                    this.isCheckMate = true;
+                }
+
+                if (pieces[i].color == "white") {
+                    tilabilityTile.classList.add("check-white")
+                } else {
+                    tilabilityTile.classList.add("check-black")
                 }
             }
         }
@@ -125,7 +165,8 @@ class ChessBoardTile extends HTMLElement {
                     this.removeChild(this.childNodes[0]);
                 }
 
-                this.appendChild(chessApp.activePiece)
+                this.appendChild(chessApp.activePiece);
+                chessApp.checkMateControl();
             }
         });
     }
@@ -162,9 +203,7 @@ class ChessPiece extends HTMLElement {
         this.clickToggle = true;
 
         this.addEventListener("click", () => {
-
             var chessApp = document.getElementsByTagName("chess-app")[0];
-
 
             if (chessApp.whoIsNext == this.color) {
                 chessApp.activePiece = null;
@@ -174,11 +213,29 @@ class ChessPiece extends HTMLElement {
 
                 this.showAbilityToMove();
             }
+
+            if (chessApp.isCheckMate && this.type != "king") {
+                console.log("check mate")
+                let removeClassArray = [];
+                let moveClass = document.getElementsByClassName("ability-to-move");
+
+                for (let index = 0; index < moveClass.length; index++) {
+                    const element = moveClass[index];
+                    if (!(element.classList.contains("check") && element.classList.contains("check-black") && element.classList.contains("check-white"))) {
+                        removeClassArray.push(element);
+                    }
+                }
+
+                for (let index = 0; index < removeClassArray.length; index++) {
+                    const element = removeClassArray[index];
+                    element.classList.remove("ability-to-move");
+                }
+            }
         });
     }
 
     showAbilityToMove() {
-        var pieces = document.getElementsByTagName("chess-piece");
+        let pieces = document.getElementsByTagName("chess-piece");
 
         for (let pieceIndex = 0; pieceIndex < pieces.length; pieceIndex++) {
             const piece = pieces[pieceIndex];
@@ -223,6 +280,15 @@ class ChessPiece extends HTMLElement {
                     this.moveAbilityDownwards(2);
                     this.moveAbilityToTheLeft(2);
                     this.moveAbilityToTheRight(2);
+
+
+                    let commonTiles = document.getElementsByClassName("check check-black check-white ability-to-move");
+
+                    for (let index = 0; index < commonTiles.length; index++) {
+                        const commonTile = commonTiles[index];
+                        commonTile.classList.remove("ability-to-move");
+                    }
+
                     break;
                 case constants.pieces.knight:
                     this.moveAbilityKnight();
@@ -434,3 +500,23 @@ customElements.define("chess-board-tile", ChessBoardTile);
 customElements.define("chess-board-row", ChessBoardRow);
 customElements.define("chess-board", ChessBoard);
 customElements.define("chess-app", ChessApp);
+
+setTimeout(() => {
+    checkMateControl();
+}, 1000);
+
+function checkMateControl() {
+
+    // var tileeeasd = document.getElementsByClassName("check");
+    // for (let index = 0; index < tileeeasd.length; index++) {
+    //     const element = tileeeasd[index];
+
+    //     let child = element.childNodes[0];
+
+    //     if (child && child.type == "king") {
+    //         console.log(child);
+    //         element.classList.add("selam");
+    //     }
+
+    // }
+}

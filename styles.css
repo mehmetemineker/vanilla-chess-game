@@ -178,3 +178,20 @@ chess-board-tile.ability-to-move {
     background: rebeccapurple;
     cursor: pointer;
 }
+
+chess-board-tile.check.check-white {}
+
+chess-board-tile.check.check-black {}
+
+chess-board-tile.check.check-white.check-black {
+    background: pink;
+}
+
+chess-board-tile.check.check-white.check-black.ability-to-move {
+    background: palevioletred;
+}
+
+chess-board-tile.check-mate {
+    background: red;
+    cursor: pointer;
+}
